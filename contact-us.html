@@ -157,7 +157,7 @@
   .footer__bottom{border-top:1px solid rgba(255,255,255,.14);padding:18px 0}
   .footer__bottom p{font-size:.76rem;color:#cfe0f2;font-weight:400}
   @media(max-width:1200px){
-    .newsbar{margin-top: 15px;}
+    .newsbar{margin-top: 30px;}
   }
   @media(max-width:1040px){
     .nav__links{position:absolute;top:100%;left:0;right:0;background:#fff;flex-direction:column;gap:0;padding:6px 0;box-shadow:0 14px 22px rgba(0,0,0,.09);max-height:0;overflow:hidden;transition:max-height .3s ease;align-items:stretch}
@@ -189,19 +189,20 @@
 <form id="my-form">
   <div class="fs-field">
     <label class="fs-label" for="name">Full Name</label>
-    <input class="fs-input" id="name" name="name" required />
+    <input type="text" class="fs-input" id="name" name="name" required />
   </div>
   <div class="fs-field">
     <label class="fs-label" for="email">Email Address</label>
-    <input class="fs-input" id="email" name="email" required />
+    <input type="email" class="fs-input" id="email" name="email" required />
   </div>
   <div class="fs-field">
     <label class="fs-label" for="number">Phone Number</label>
-    <input class="fs-input" id="number" name="number" />
+    <input type="tel" class="fs-input" id="number" name="number" />
   </div>
   <div class="fs-field">
     <label class="fs-label" for="message">Inquiry Message</label>
     <textarea
+      type="text"
       class="fs-textarea"
       id="message"
       name="message"
@@ -222,6 +223,19 @@
   formspree("initForm", {
     formElement: "#my-form",
     formId: "xqeronnv",
+  });
+    document.getElementById("my-form").addEventListener("submit", function (e) {
+    const email = document.getElementById("email");
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+    if (!emailRegex.test(email.value.trim())) {
+        e.preventDefault();
+
+        email.setCustomValidity("Please enter a valid email address.");
+        email.reportValidity();
+        return false;
+    }
+    email.setCustomValidity("");
   });
 </script>
 <script src="https://unpkg.com/@formspree/ajax@1" defer></script>
