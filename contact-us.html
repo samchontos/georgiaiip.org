@@ -235,10 +235,8 @@
       }
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
       if (emailRegex.test(value)) {
-          // Valid email — clear any previous error
           email.setCustomValidity("");
       } else {
-          // Invalid email
           email.setCustomValidity("Please enter a valid email address.");
       }
   });
